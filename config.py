@@ -1,8 +1,6 @@
 import os
 import yaml
 
-print(os.environ)
-# os.environ["ENV"] = "staging"
 env = os.environ['ENV']
 
 config_dict = {}
