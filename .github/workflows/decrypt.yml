@@ -1,0 +1,31 @@
+on:
+  push:
+    branches:
+      - develop
+      - main
+
+jobs:
+  decrypt-config-staging:
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    env:
+      ENV: "staging"
+      SOPS_KMS_ARN: "arn:aws:kms:us-east-1:899632766336:key/3b816368-7a67-47ba-912c-b6f8802a06d6"
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Install Dependencies
+        run: |
+          wget https://github.com/mozilla/sops/releases/download/v3.5.0/sops-v3.5.0-1.x86_64.rpm
+          sudo rpm -iv sops-v3.5.0-1.x86_64.rpm
+          pip install pyyaml
+      - uses: actions/checkout@v2.1.0
+        name: Checkout Repo
+      - name: Decrypt Staging Config
+        run: sops -d -i configs/staging.yml
+      - name: Run Python script
+        run: python config.py
