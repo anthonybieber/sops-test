@@ -26,6 +26,6 @@ jobs:
       - uses: actions/checkout@v2.1.0
         name: Checkout Repo
       - name: Decrypt Staging Config
-        run: sops -d -i config/staging.yml
+        run: sops -d -i configs/staging.yml
       - name: Run Python script
         run: python config.py
