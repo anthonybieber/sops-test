@@ -1,0 +1,8 @@
+db:
+  db_url: localhost
+  db_port: 3306
+  db_pass: root
+
+api:
+  api_url: http://some-url.com
+  token: 123445555
