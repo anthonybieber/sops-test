@@ -11,3 +11,7 @@ jobs:
         run: |
           pwd
           printenv
+      - name: Mitch step Two
+        run: |
+        echo "mitch two"
+        ls -la
