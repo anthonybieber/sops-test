@@ -1,0 +1,13 @@
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  mitch-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mitch Step
+        run: |
+          pwd
+          printenv
