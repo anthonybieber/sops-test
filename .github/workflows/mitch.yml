@@ -13,5 +13,5 @@ jobs:
           printenv
       - name: Mitch step Two
         run: |
-        echo "mitch two"
-        ls -la
+          echo "mitch two"
+          ls -la
